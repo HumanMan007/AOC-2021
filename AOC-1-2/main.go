@@ -51,13 +51,14 @@ func main() {
 
 	if len(os.Args) < 2 {
 		log.Fatal("input file")
-		os.Exit(-1)
+		os.Exit(1)
 	}
 	path := os.Args[1]
 
 	arr, err := readList(path)
 	if err != nil {
-		fmt.Printf("loading list: %v", err)
+		log.Fatalf("loading list: %v", err)
+		os.Exit(1)
 	}
 
 	fmt.Printf("%v \n- solution %v\n", arr, windowSolve(arr))

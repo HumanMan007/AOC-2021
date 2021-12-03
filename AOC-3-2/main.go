@@ -12,7 +12,6 @@ func bool2int(arr []bool) int {
 	ret, power := 0, 1
 
 	for i := len(arr) - 1; i >= 0; i-- {
-		// In case of equal number I asume the majority of 0 by default
 		if arr[i] {
 			ret += power
 		}
@@ -37,18 +36,12 @@ func main() {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	maxCount := []int{}
 	bitList_O2 := list.New()
 	bitList_CO2 := list.New()
 
 	for scanner.Scan() {
 		line := scanner.Bytes()
 
-		// If encounter line with more 'bits' inrease size of array
-		if inc := len(line) - len(maxCount); inc > 0 {
-			t := make([]int, inc)
-			maxCount = append(maxCount, t...)
-		}
 		bitline := make([]bool, len(line))
 		for i, c := range line {
 			switch c {
@@ -65,8 +58,7 @@ func main() {
 		bitList_CO2.PushBack(bitline)
 	}
 
-	ruleIndex := 0
-	for bitList_O2.Len() > 1 && ruleIndex < len(bitList_O2.Front().Value.([]bool)) {
+	for ruleIndex := 0; bitList_O2.Len() > 1 && ruleIndex < len(bitList_O2.Front().Value.([]bool)); ruleIndex++ {
 
 		//Get bit rule
 		ruleDelta := 0
@@ -90,10 +82,9 @@ func main() {
 			elem = t
 		}
 
-		ruleIndex++
 	}
-	ruleIndex = 0
-	for bitList_CO2.Len() > 1 && ruleIndex < len(bitList_CO2.Front().Value.([]bool)) {
+
+	for ruleIndex := 0; bitList_CO2.Len() > 1 && ruleIndex < len(bitList_CO2.Front().Value.([]bool)); ruleIndex++ {
 
 		//Get bit rule
 		ruleDelta := 0
@@ -117,7 +108,6 @@ func main() {
 			elem = t
 		}
 
-		ruleIndex++
 	}
 
 	O2 := bool2int(bitList_O2.Front().Value.([]bool))

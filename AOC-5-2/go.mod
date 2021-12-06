@@ -1,3 +1,3 @@
-module AOC5-1
+module AOC5-2
 
 go 1.17

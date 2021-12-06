@@ -1,3 +1,3 @@
-module AOC3-1
+module AOC3-2
 
 go 1.17

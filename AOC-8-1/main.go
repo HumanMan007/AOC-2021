@@ -36,7 +36,7 @@ func parseInputFromFile(file *os.File) int {
 func main() {
 
 	if len(os.Args) < 2 {
-		log.Fatalf("input file and iterations")
+		log.Fatalf("input file")
 	}
 	path := os.Args[1]
 
